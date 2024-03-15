@@ -15,7 +15,7 @@ def is_open_positions(client, market):
 
     all_positions = client.private.get_positions(
         market = market,
-        status = "OPEN"
+        status = "OPEN"g
     )
 
     # Determine if open
