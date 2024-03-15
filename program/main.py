@@ -10,9 +10,9 @@ from func_messaging import send_message
 # MAIN FUNCTION
 if __name__== "__main__":
 
-    success = send_message("KEK_LOL_VALIDOL")
-    print(success)
-    exit(1)
+    #Message on start
+    send_message("Bot launch successful")
+   
 
     # Connect to client
     try:
@@ -21,6 +21,7 @@ if __name__== "__main__":
     except Exception as e:
         print(e)
         print(f"Error connecting to client: {e}")
+        send_message(f"Failed to connect to client")
         exit(1)
 
     # Abort all positions
@@ -32,6 +33,7 @@ if __name__== "__main__":
 
         except Exception as e:
             print(f"Error closing all positions {e}")
+            send_message(f"Error closing of all positions {e}")
             exit(1)
 
     # Find Cointegrated Pairs
@@ -44,6 +46,7 @@ if __name__== "__main__":
 
         except Exception as e:
             print(f"Error constructing market prices: {e}")
+            send_message(f"Error constructing market prices: {e}")
             exit(1)
         
         # Store Cointegrated Pairs
@@ -55,6 +58,8 @@ if __name__== "__main__":
                 exit(1)
         except Exception as e:
             print(f"Error saving cointegrated pairs: {e}")
+            send_message(f"Error saving cointegrated pairs: {e}")
+
             exit(1)
 
     #Run as always on
@@ -67,6 +72,8 @@ if __name__== "__main__":
                 manage_trade_exits(client)
             except Exception as e:
                 print(f"Error managing exiting positions: {e}")
+                send_message(f"Error managing exiting positions: {e}")
+
                 exit(1)
         
         # Place trades for opening positions
@@ -76,4 +83,5 @@ if __name__== "__main__":
                 open_positions(client)
             except Exception as e:
                 print(f"Error trading pairs: {e}")
+                send_message(f"Error oppening trades: {e}")
                 exit(1)
