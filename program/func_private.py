@@ -2,6 +2,7 @@ from func_utils import format_number
 from datetime import datetime, timedelta
 import time
 from pprint import pprint
+import json
 
 import pytz
  
@@ -137,6 +138,12 @@ def abort_all_positions(client):
             close_orders.append(order)
 
             time.sleep(0.2)
+        
+        # Override json file with empty list
+        bot_agents = []
+        with open("bot_agents.json", "w") as f:
+            json.dump(bot_agents, f)
+    
 
         return close_orders
 
